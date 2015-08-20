@@ -1,0 +1,54 @@
+---
+- set_fact:
+    instantclient_dir: "instantclient_{{ instantclient_version | regex_replace('\\.', '_') }}"
+- set_fact:
+    oracle_home: "{{ instantclient_base }}/{{ instantclient_dir }}"
+
+- name: creating base directory
+  sudo: yes
+  file:
+    path: "{{ instantclient_base }}"
+    state: directory
+    owner: "{{ ansible_env.USER }}"
+    group: wheel
+
+- name: installing oracle client
+  unarchive:
+    src: "{{ item }}"
+    dest: "{{ instantclient_base }}"
+  with_items: instantclient_package_archives
+
+- name: link some libs to versions we care about
+  file:
+    src: "{{ oracle_home }}/libclntsh.dylib.11.1"
+    dest: "{{ oracle_home }}/libclntsh.dylib"
+    state: link
+
+- name: link sqlplus to my bin
+  file:
+    src: "{{ oracle_home }}/sqlplus"
+    dest: ~/bin/sqlplus
+    state: link
+
+- name: touch bashrc
+  file:
+    path: "{{ instantclient_env_file }}"
+    state: touch
+
+- name: set ORACLE_HOME environment variables
+  lineinfile:
+    dest: "{{ instantclient_env_file }}"
+    line: "export {{ item }}={{ oracle_home }}"
+  with_items: instantclient_home_vars
+
+- name: set library path environment variables
+  lineinfile:
+    dest: "{{ instantclient_env_file }}"
+    line: "export {{ item }}={{ oracle_home }}/sdk/include"
+  with_items: instantclient_lib_vars
+
+- name: set environment variables with home and library path
+  lineinfile:
+    dest: "{{ instantclient_env_file }}"
+    line: "export {{ item }}={{ oracle_home }}/sdk/include:{{ oracle_home }}"
+  with_items: instantclient_lib_and_home_vars

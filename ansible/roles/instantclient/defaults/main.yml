@@ -1,0 +1,24 @@
+---
+instantclient_version: 11.2
+instantclient_base: /opt/oracle
+instantclient_env_file: /etc/environment
+
+instantclient_package_archives:
+ - instantclient-basic-macos.x64-11.2.0.4.0.zip
+ - instantclient-basiclite-macos.x64-11.2.0.4.0.zip
+ - instantclient-jdbc-macos.x64-11.2.0.4.0.zip
+ - instantclient-odbc-macos.x64-11.2.0.4.0.zip
+ - instantclient-sdk-macos.x64-11.2.0.4.0.zip
+ - instantclient-sqlplus-macos.x64-11.2.0.4.0.zip
+ - instantclient-tools-macos.x64-11.2.0.4.0.zip
+
+instantclient_home_vars:
+  - ORACLE_HOME
+  - OCI_LIB_DIR
+
+instantclient_lib_vars:
+  - OCI_INC_DIR
+
+instantclient_lib_and_home_vars:
+  - DYLD_LIBRARY_PATH
+  - LD_LIBRARY_PATH
