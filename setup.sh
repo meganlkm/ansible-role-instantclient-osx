@@ -6,9 +6,10 @@ function command_exists() {
     }
 }
 
-export PROJECT_HOME="${HOME}/dev"
+VENV_PROJECT=instantclient-role
+export PROJECT_HOME="${HOME}/dev/${VENV_PROJECT}"
 export WORKON_HOME="${PROJECT_HOME}/ENVS"
-VENV_PROJECT=instant-oracle
+
 
 [[ ! -d $WORKON_HOME  ]] && mkdir -p $WORKON_HOME
 [[ ! -d $PROJECT_HOME  ]] && mkdir -p $PROJECT_HOME

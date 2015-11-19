@@ -2,7 +2,27 @@
 
 installs and configures oracle instantclient on my mac.
 
-1. download 64 bit versions of macos-basic, sqlplus, and sdk (at least)
-2. mv zip files to ./ansible/roles/instantclient/files/
-3. check the variables set in defaults/main.yml
-4. if needed, override defaults in vars/main.yml
+## Setup
+
+**First**, download 64 bit versions of macos-basic, sqlplus, and sdk (at least).
+
+* The current link to the zips is http://www.oracle.com/technetwork/topics/intel-macsoft-096467.html - google will tell your where to go if this url doesn't work.
+* on the download page make sure to scroll down to the 64 bit versions
+* move zip files to `./ansible/roles/instantclient/files/`
+
+**Next**, review the default variable values in `./ansible/roles/instantclient/defaults/main.yml`. If needed, override these variables in `./ansible/roles/instantclient/vars/main.yml`
+
+## Install
+
+In order to use the setup.sh script the following pip packages are required:
+
+* virtualenv
+* virtualenvwrapper
+
+Ansible is installed in the virtualenv.
+
+Run it:
+
+````
+sh setup.sh
+````
