@@ -1,8 +1,4 @@
 ---
-instantclient_version: 11.2
-instantclient_full_version: 11.2.0.4.0
-instantclient_bin_dir: /usr/local/bin
-
 instantclient_package_archives:
  - "instantclient-basic-macos.x64-{{ instantclient_full_version }}.zip"
  - "instantclient-sdk-macos.x64-{{ instantclient_full_version }}.zip"
