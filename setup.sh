@@ -20,4 +20,4 @@ fi
 source ./.venv/bin/activate
 pip install -r requirements.pip
 
-ansible-playbook --ask-sudo-pass -i ansible/inventories/osx ansible/main.yml --connection=local -vvvv
+ansible-playbook --ask-sudo-pass -i ansible/inventory/localhost ansible/main.yml -vvvv

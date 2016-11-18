@@ -1,6 +1,7 @@
 **/files/
 **/vars/
 .venv
+tmp
 ignore
 instantclient-*.zip
 *.retry

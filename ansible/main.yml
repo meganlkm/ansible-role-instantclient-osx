@@ -1,7 +1,5 @@
 ---
-# file: main.yml
-
-- hosts: all
+- hosts: localhost
   roles:
     # - uninstall_instantclient
     - instantclient
