@@ -6,20 +6,17 @@ function command_exists() {
     }
 }
 
-VENV_PROJECT=instantclient-role
-export PROJECT_HOME="${HOME}/dev/${VENV_PROJECT}"
-export WORKON_HOME="${PROJECT_HOME}/ENVS"
+if ! command_exists "virtualenv"; then
+    pip install virtualenv
+fi
 
+FILES_DIR="./ansible/roles/instantclient/files"
+[[ ! -d $FILES_DIR ]] && mkdir $FILES_DIR
+mv *.zip $FILES_DIR/
 
-[[ ! -d $WORKON_HOME  ]] && mkdir -p $WORKON_HOME
-[[ ! -d $PROJECT_HOME  ]] && mkdir -p $PROJECT_HOME
-
-source /usr/local/bin/virtualenvwrapper.sh
-
-mkvirtualenv ${VENV_PROJECT}
-source ${WORKON_HOME}/${VENV_PROJECT}/bin/activate
+[[ ! -f ./.venv/bin/activate ]] && virtualenv .venv
+source ./.venv/bin/activate
 pip install -r requirements.pip
 
-if command_exists "ansible-playbook"; then
-    ansible-playbook --ask-sudo-pass -i ansible/inventories/osx ansible/main.yml --connection=local
-fi
+ansible-playbook --ask-sudo-pass -i ansible/inventories/osx ansible/main.yml --connection=local -vvvv
+# ansible-playbook -i ansible/inventories/osx ansible/main.yml --connection=local -vvvv

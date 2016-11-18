@@ -1,1 +1,5 @@
+**/files/
+.venv
+ignore
 instantclient-*.zip
+*.retry

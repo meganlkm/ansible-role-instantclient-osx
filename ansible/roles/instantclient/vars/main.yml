@@ -1,8 +1,0 @@
----
-instantclient_version: 11.2
-instantclient_env_file: ~/.bashrc
-
-instantclient_package_archives:
- - instantclient-basic-macos.x64-11.2.0.4.0.zip
- - instantclient-sdk-macos.x64-11.2.0.4.0.zip
- - instantclient-sqlplus-macos.x64-11.2.0.4.0.zip
