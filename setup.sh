@@ -12,7 +12,9 @@ fi
 
 FILES_DIR="./ansible/roles/instantclient/files"
 [[ ! -d $FILES_DIR ]] && mkdir $FILES_DIR
-mv *.zip $FILES_DIR/
+if ls *.zip 1> /dev/null 2>&1; then
+    mv *.zip $FILES_DIR/
+fi
 
 [[ ! -f ./.venv/bin/activate ]] && virtualenv .venv
 source ./.venv/bin/activate
