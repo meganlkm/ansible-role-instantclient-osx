@@ -5,14 +5,22 @@
     path: "{{ instantclient_base }}"
     state: absent
 
-- name: remove link to sqlplus in my bin
+- name: remove link sqlplus
+  sudo: yes
   file:
-    path: ~/bin/sqlplus
+    dest: "{{ instantclient_bin_dir }}/sqlplus"
+    state: absent
+
+- name: remove sqlplus
+  sudo: yes
+  file:
+    path: "{{ oracle_home }}/sqlplus"
     state: absent
 
 - name: remove ORACLE_HOME environment variables
+  sudo: yes
   lineinfile:
     dest: "{{ instantclient_env_file }}"
     regexp: "^export {{ item }}="
     state: absent
-  with_items: instantclient_env_vars
+  with_items: "{{ instantclient_env_vars }}"

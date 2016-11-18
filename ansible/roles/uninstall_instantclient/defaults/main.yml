@@ -1,7 +1,4 @@
 ---
-instantclient_base: /opt/oracle
-instantclient_env_file: /etc/environment
-
 instantclient_env_vars:
   - ORACLE_HOME
   - OCI_LIB_DIR

@@ -1,1 +1,8 @@
 ---
+instantclient_version: 11.2
+instantclient_full_version: 11.2.0.4.0
+
+instantclient_base: /opt/oracle
+instantclient_env_file: /etc/environment
+
+instantclient_bin_dir: /usr/local/bin

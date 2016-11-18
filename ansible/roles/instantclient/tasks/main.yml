@@ -1,9 +1,4 @@
 ---
-- set_fact:
-    instantclient_dir: "instantclient_{{ instantclient_version | regex_replace('\\.', '_') }}"
-- set_fact:
-    oracle_home: "{{ instantclient_base }}/{{ instantclient_dir }}"
-
 - name: creating base directory
   sudo: yes
   file:

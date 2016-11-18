@@ -1,5 +1,8 @@
 ---
 - hosts: localhost
+  vars:
+    instantclient_dir: "instantclient_{{ instantclient_version | regex_replace('\\.', '_') }}"
+    oracle_home: "{{ instantclient_base }}/{{ instantclient_dir }}"
   roles:
     # - uninstall_instantclient
     - instantclient
