@@ -16,7 +16,7 @@
   unarchive:
     src: "{{ item }}"
     dest: "{{ instantclient_base }}"
-  with_items: instantclient_package_archives
+  with_items: "{{ instantclient_package_archives }}"
 
 - name: link some libs to versions we care about
   file:
@@ -24,13 +24,21 @@
     dest: "{{ oracle_home }}/libclntsh.dylib"
     state: link
 
+- name: ensure bin directory exists
+  sudo: yes
+  file:
+    path: "{{ instantclient_bin_dir }}"
+    state: directory
+    owner: "{{ ansible_env.USER }}"
+    group: wheel
+
 - name: link sqlplus to my bin
   file:
     src: "{{ oracle_home }}/sqlplus"
-    dest: ~/bin/sqlplus
+    dest: "{{ instantclient_bin_dir }}/sqlplus"
     state: link
 
-- name: touch bashrc
+- name: touch env file
   file:
     path: "{{ instantclient_env_file }}"
     state: touch
@@ -39,16 +47,16 @@
   lineinfile:
     dest: "{{ instantclient_env_file }}"
     line: "export {{ item }}={{ oracle_home }}"
-  with_items: instantclient_home_vars
+  with_items: "{{ instantclient_home_vars }}"
 
 - name: set library path environment variables
   lineinfile:
     dest: "{{ instantclient_env_file }}"
     line: "export {{ item }}={{ oracle_home }}/sdk/include"
-  with_items: instantclient_lib_vars
+  with_items: "{{ instantclient_lib_vars }}"
 
 - name: set environment variables with home and library path
   lineinfile:
     dest: "{{ instantclient_env_file }}"
     line: "export {{ item }}={{ oracle_home }}/sdk/include:{{ oracle_home }}"
-  with_items: instantclient_lib_and_home_vars
+  with_items: "{{ instantclient_lib_and_home_vars }}"

@@ -1,4 +1,5 @@
 **/files/
+**/vars/
 .venv
 ignore
 instantclient-*.zip
