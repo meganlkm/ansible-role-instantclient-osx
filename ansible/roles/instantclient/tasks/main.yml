@@ -27,6 +27,11 @@
     owner: "{{ ansible_env.USER }}"
     group: wheel
 
+- name: remove link sqlplus to if it exists
+  file:
+    dest: "{{ instantclient_bin_dir }}/sqlplus"
+    state: absent
+
 - name: link sqlplus to my bin
   file:
     src: "{{ oracle_home }}/sqlplus"
